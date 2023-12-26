@@ -1,5 +1,5 @@
 const Browse = () => {
-  return <div>Browse</div>;
+  return <div className="bg-black">Browse</div>;
 };
 
 export default Browse;
