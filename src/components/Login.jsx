@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import Header from "./Header";
 import BG from "../assets/bgc.jpg";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
@@ -16,22 +21,63 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-    console.log(email.current.value);
-    console.log(password.current.value);
+    // console.log(email.current.value);
+    // console.log(password.current.value);
     if (!isSignedIn) {
       const message = checkValidData(
         email.current.value,
         password.current.value,
         name.current.value
       );
-      console.log(name.current.value);
       setErrorMessage(message);
+      if (message) return;
+      // logic for sign up
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " - " + errorMessage);
+          // ..
+        });
+      // console.log(name.current.value);
     } else {
       const message = checkValidData(
         email.current.value,
         password.current.value
       );
       setErrorMessage(message);
+      if (message) return;
+
+      // logic for sign in
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          console.log("logged in success");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + "----" + errorMessage);
+          setErrorMessage("Please check your credentials properly");
+        });
     }
   };
 
