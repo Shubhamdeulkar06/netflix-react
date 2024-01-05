@@ -5,8 +5,11 @@ import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
@@ -15,6 +18,7 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setIsSignedIn(!isSignedIn);
@@ -40,7 +44,27 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/73666257?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
           // ...
         })
         .catch((error) => {
@@ -68,8 +92,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          console.log("logged in success");
           // ...
         })
         .catch((error) => {
@@ -95,6 +117,7 @@ const Login = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <div
       className={`w-full min-h-screen bg-cover  ${isMobile ? "bg-black" : " "}`}

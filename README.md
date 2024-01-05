@@ -21,3 +21,8 @@ Currently, two official plugins are available:
 - create Sign Up user acoount in firebase
 - Implement Sign in / sign up user Api
 - Created Redux store with user slice
+- Implemented signout
+- updated profile api
+- Bugfix: sign up user displayName and profile picture update to store
+- Bugfix: if user is not loggedin Redirect user to / page and vice-versa
+- Unsubscribed to the onAuthStateChanged callback

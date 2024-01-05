@@ -13,6 +13,7 @@ const Body = () => {
       element: <Browse />,
     },
   ]);
+
   return (
     <div className="bg-black h-screen m-0">
       <RouterProvider router={appRouter} />
