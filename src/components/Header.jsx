@@ -1,5 +1,5 @@
 import LOGO from "../assets/Netflix_Logo.png";
-// import Netflix_User_ICON from "../assets/Netflix-userIcon.jpeg";
+import USER_AVATAR from "../assets/Netflix-userIcon.jpeg";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -51,12 +51,8 @@ const Header = () => {
     <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center">
       <img className="w-24 pt-3 ml-[2%] md:w-44" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex mx-2 text-white">
-          <img
-            className="w-10 rounded-full "
-            src={user?.photoURL}
-            alt="user icon"
-          />
+        <div className="flex flex-col items-center mx-2 text-white">
+          <img className="w-10 rounded-md " src={USER_AVATAR} alt="user icon" />
           <button onClick={handleSignOut}>Sign out</button>
         </div>
       )}

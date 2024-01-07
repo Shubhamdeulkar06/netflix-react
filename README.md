@@ -26,3 +26,18 @@ Currently, two official plugins are available:
 - Bugfix: sign up user displayName and profile picture update to store
 - Bugfix: if user is not loggedin Redirect user to / page and vice-versa
 - Unsubscribed to the onAuthStateChanged callback
+- Add hard codded values to a constant file
+- Register for TMDb api and create an app
+- Get data from TMDb now playing api
+- created custom hook to fetch Now playing videos & for clean code practice
+- Create a movieSlice
+- update store with movie data
+- Planning for maincontainer and secondary container
+- Fetch data for trailer video
+- Update store with trailer video data
+- Embeded the youtube video & made it autoplay and muted
+- added styling to main container
+-
+-
+-
+-

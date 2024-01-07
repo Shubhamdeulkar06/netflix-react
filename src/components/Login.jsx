@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Header from "./Header";
 import BG from "../assets/bgc.jpg";
+import USER_AVATAR from "../assets/Netflix-userIcon.jpeg";
 import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
@@ -47,7 +48,7 @@ const Login = () => {
           // console.log(user);
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/73666257?v=4",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
