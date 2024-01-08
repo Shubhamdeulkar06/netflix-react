@@ -51,7 +51,7 @@ const Header = () => {
     <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center">
       <img className="w-24 pt-3 ml-[2%] md:w-44" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex flex-col items-center mx-2 text-white">
+        <div className="flex flex-col items-center mx-4 text-white">
           <img className="w-10 rounded-md " src={USER_AVATAR} alt="user icon" />
           <button onClick={handleSignOut}>Sign out</button>
         </div>

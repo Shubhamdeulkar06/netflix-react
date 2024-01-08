@@ -37,7 +37,7 @@ Currently, two official plugins are available:
 - Update store with trailer video data
 - Embeded the youtube video & made it autoplay and muted
 - added styling to main container
--
--
--
--
+- Built Movie list and movie cards components for secondary container
+- created custom hook to fetch each Popular, Top Rated & Upcoming Movie from TMDB Api
+- Added all categories to movie Slice
+- Styled Secondary container

@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="absolute bottom-0 w-full">
-      <div className="my-16 px-6 md:px-24">
+    <footer className="bg-black w-full">
+      <div className="py-16 px-6 md:px-24">
         <div className="text-gray-300">Questions? Call 000-800-919-1694</div>
         <ul className="text-gray-300 my-4 grid grid-cols-2 grid-rows-8 lg:grid-cols-4 lg:grid-rows-4 gap-1">
           <li>
