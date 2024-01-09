@@ -18,7 +18,7 @@ const Browse = () => {
       <Header />
       <MainContainer />
       <SecondaryContainer />
-      <div className="p-2 bg-gray-600 w-full"></div>
+      <div className="p-1 bg-gray-700 w-full"></div>
       <Footer />
     </div>
   );
