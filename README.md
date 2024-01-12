@@ -41,3 +41,19 @@ Currently, two official plugins are available:
 - created custom hook to fetch each Popular, Top Rated & Upcoming Movie from TMDB Api
 - Added all categories to movie Slice
 - Styled Secondary container
+- GPT search feature
+- added gptSlice for toggleGptsearch functionality
+- added GptSearch component
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-

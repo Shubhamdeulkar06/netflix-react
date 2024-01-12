@@ -14,6 +14,8 @@ import { changeLanguage } from "../utils/configSlice";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
+  const langKey = useSelector((store) => store.config.lang);
 
   const user = useSelector((store) => store.user);
   const handleSignOut = () => {
@@ -60,17 +62,22 @@ const Header = () => {
     <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center relative z-50">
       <img className="w-24 pt-3 ml-[2%] md:w-44" src={LOGO} alt="logo" />
       {user && (
-        <div className="flex gap-2">
-          <select
-            className="px-4 py-2 bg-gray-800 text-white"
-            onChange={handleLanguageChange}
-          >
-            {supportedLanguage.map((language) => (
-              <option key={language.identifier} value={language.identifier}>
-                {language.name}
-              </option>
-            ))}
-          </select>
+        <div className="flex gap-2 items-center">
+          {showGptSearch && (
+            <div>
+              <select
+                className="px-4 py-2 bg-gray-800 text-white rounded-lg"
+                onChange={handleLanguageChange}
+                value={langKey}
+              >
+                {supportedLanguage.map((language) => (
+                  <option key={language.identifier} value={language.identifier}>
+                    {language.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           <div>
             <button
@@ -80,7 +87,7 @@ const Header = () => {
               <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-red-900 opacity-[3%]"></span>
               <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24  bg-red-900 opacity-100 group-hover:-translate-x-8"></span>
               <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-gray-900">
-                GPT Search
+                {showGptSearch ? "Home" : "GPT Search"}
               </span>
               <span className="absolute inset-0 border-2 border-red-900 rounded-full"></span>
             </button>
