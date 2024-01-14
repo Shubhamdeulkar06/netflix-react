@@ -154,7 +154,7 @@ const Login = () => {
             className="px-5 py-4 my-2 w-full rounded-md bg-[#333333]"
           />
           <button
-            className="px-5 my-6 py-3 text-white font-bold rounded-md bg-red-600 w-full"
+            className="px-5 my-6 py-3 text-white font-bold rounded-md bg-red-600 w-full hover:bg-red-700 ease-in-out duration-200"
             onClick={handleButtonClick}
           >
             {isSignedIn ? "Sign In" : " Sign Up"}
