@@ -44,8 +44,8 @@ Currently, two official plugins are available:
 - GPT search feature
 - added gptSlice for toggleGptsearch functionality
 - added GptSearch component
--
--
+- Gpt Search Bar component
+- created config slice for multi-language feature in GptSearchBar component
 -
 -
 -
