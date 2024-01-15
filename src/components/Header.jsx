@@ -2,14 +2,14 @@ import LOGO from "../assets/Netflix_Logo.png";
 import USER_AVATAR from "../assets/Netflix-userIcon.jpeg";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGptSearch } from "../utils/gptSlice";
 import { supportedLanguage } from "../utils/languageConstants";
-import { changeLanguage } from "../utils/configSlice";
+import { changeLanguage, toggleUserDropdown } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -42,10 +42,14 @@ const Header = () => {
           })
         );
         navigate("/browse");
+
         // ...
       } else {
         dispatch(removeUser());
+
         navigate("/");
+        isDropdownOpen && dispatch(toggleUserDropdown());
+        showGptSearch && dispatch(toggleGptSearch());
       }
     });
     // unsubscribe when component will unmount
@@ -58,9 +62,21 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+
+  const isDropdownOpen = useSelector(
+    (store) => store.config.toggleDropdownHeader
+  );
+
+  const toggleDropdown = () => {
+    dispatch(toggleUserDropdown());
+  };
   return (
-    <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center relative z-50">
-      <img className="w-24 pt-3 ml-[2%] md:w-44" src={LOGO} alt="logo" />
+    <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center relative z-50 md:px-10">
+      <span className="ml-[2%] md:m-0">
+        <Link to={"/"}>
+          <img className="w-24 pt-3  md:w-44" src={LOGO} alt="logo" />
+        </Link>
+      </span>
       {user && (
         <div className="flex gap-2 items-center">
           {showGptSearch && (
@@ -79,7 +95,7 @@ const Header = () => {
             </div>
           )}
 
-          <div>
+          <div className="hidden md:block">
             <button
               className="relative inline-flex items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group"
               onClick={handleGptsearch}
@@ -92,15 +108,73 @@ const Header = () => {
               <span className="absolute inset-0 border-2 border-red-900 rounded-full"></span>
             </button>
           </div>
-          <div className="flex flex-col items-center mx-4 text-white">
-            <img
-              className="w-7 md:w-10 rounded-md "
-              src={USER_AVATAR}
-              alt="user icon"
-            />
-            <button className="text-sm" onClick={handleSignOut}>
-              Sign out
+          <div className="relative  w-44">
+            <button
+              id="dropdownAvatarNameButton"
+              className="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0  dark:text-white"
+              onClick={toggleDropdown}
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 me-2 rounded-md"
+                src={USER_AVATAR}
+                alt="user photo"
+              />
+              {user.displayName}
+              <svg
+                className={`w-2.5 h-2.5 ms-3 transform ${
+                  isDropdownOpen ? "rotate-180" : "rotate-0"
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
             </button>
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div
+                id="dropdownAvatarName"
+                className="z-10 absolute mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-900 dark:divide-gray-600 right-0"
+              >
+                <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                  <div className="font-medium">Pro User</div>
+                  <div className="truncate">{user.email}</div>
+                </div>
+                <ul
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200 block md:hidden"
+                  aria-labelledby="dropdownAvatarNameButton"
+                >
+                  <li>
+                    <a
+                      href="#"
+                      onClick={handleGptsearch}
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      {showGptSearch ? "Home" : "GPT Search"}
+                    </a>
+                  </li>
+                </ul>
+                <div className="py-2">
+                  <a
+                    href="#"
+                    onClick={handleSignOut}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Sign out
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
