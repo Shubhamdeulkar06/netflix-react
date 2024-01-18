@@ -151,16 +151,24 @@ const Header = () => {
                   <div className="truncate">{user.email}</div>
                 </div>
                 <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200 block md:hidden"
+                  className="py-2 text-sm text-gray-700 dark:text-gray-200 block"
                   aria-labelledby="dropdownAvatarNameButton"
                 >
-                  <li>
+                  <li className="block md:hidden">
                     <a
                       href="#"
                       onClick={handleGptsearch}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       {showGptSearch ? "Home" : "GPT Search"}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      Search
                     </a>
                   </li>
                 </ul>
