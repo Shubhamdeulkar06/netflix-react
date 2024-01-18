@@ -71,7 +71,7 @@ const Header = () => {
     dispatch(toggleUserDropdown());
   };
   return (
-    <div className="w-full bg-gradient-to-b from-black  py-2 brightness-150 m-0 flex justify-between items-center relative z-50 md:px-10">
+    <div className="w-full bg-gradient-to-b from-black px-2 py-2 brightness-150 m-0 flex justify-between items-center relative z-50 md:px-10">
       <span className="ml-[2%] md:m-0">
         <Link to={"/"}>
           <img className="w-24 pt-3  md:w-44" src={LOGO} alt="logo" />
@@ -108,7 +108,7 @@ const Header = () => {
               <span className="absolute inset-0 border-2 border-red-900 rounded-full"></span>
             </button>
           </div>
-          <div className="relative  w-44">
+          <div className="relative md:w-44">
             <button
               id="dropdownAvatarNameButton"
               className="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0  dark:text-white"
